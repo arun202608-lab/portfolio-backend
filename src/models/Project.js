@@ -34,6 +34,23 @@ const projectSchema = new mongoose.Schema(
       type: String,
       trim: true,
       default: "",
+      set: (val) => {
+        if (!val) return "";
+        const trimmed = String(val).trim();
+        if (!trimmed) return "";
+        return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+      },
+    },
+    github: {
+      type: String,
+      trim: true,
+      default: "",
+      set: (val) => {
+        if (!val) return "";
+        const trimmed = String(val).trim();
+        if (!trimmed) return "";
+        return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+      },
     },
     order: {
       type: Number,

@@ -112,7 +112,7 @@ export async function getProjectById(req, res, next) {
  */
 export async function createProject(req, res, next) {
   try {
-    const { title, category, description, image, tech, demo, order } = req.body;
+    const { title, category, description, image, tech, demo, github, order } = req.body;
 
     if (!title || !title.trim()) {
       return res.status(400).json({
@@ -154,6 +154,7 @@ export async function createProject(req, res, next) {
       image: image && image.trim() ? image.trim() : undefined,
       tech: normalizedTech,
       demo: demo ? demo.trim() : "",
+      github: github ? github.trim() : "",
       order: typeof order === "number" ? order : 0,
     });
 
@@ -175,7 +176,7 @@ export async function createProject(req, res, next) {
 export async function updateProject(req, res, next) {
   try {
     const { id } = req.params;
-    const { title, category, description, image, tech, demo, order } = req.body;
+    const { title, category, description, image, tech, demo, github, order } = req.body;
 
     const project = await Project.findById(id);
 
@@ -191,6 +192,7 @@ export async function updateProject(req, res, next) {
     if (description && description.trim()) project.description = description.trim();
     if (image !== undefined) project.image = image.trim();
     if (demo !== undefined) project.demo = demo.trim();
+    if (github !== undefined) project.github = github.trim();
     if (order !== undefined) project.order = Number(order) || 0;
 
     if (tech !== undefined) {
