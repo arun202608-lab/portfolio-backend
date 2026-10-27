@@ -4,6 +4,11 @@ import mongoose from "mongoose";
  * Connect to MongoDB Atlas using Mongoose
  */
 export async function connectDB() {
+  // If already connected, return existing connection
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection;
+  }
+
   try {
     const mongoUri = process.env.MONGODB_URI;
 
@@ -32,7 +37,6 @@ export async function connectDB() {
     return conn;
   } catch (error) {
     console.error("❌ [MongoDB] Connection failed:", error.message);
-    // Don't kill the server process so that health endpoints still respond with status
     return null;
   }
 }

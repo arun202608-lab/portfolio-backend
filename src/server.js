@@ -87,6 +87,18 @@ app.get("/", (req, res) => {
   });
 });
 
+// Ensure database connection for incoming requests (vital for serverless lambdas)
+app.use(async (req, res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    try {
+      await connectDB();
+    } catch (err) {
+      console.error("DB connection error in middleware:", err.message);
+    }
+  }
+  next();
+});
+
 // Mount API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
