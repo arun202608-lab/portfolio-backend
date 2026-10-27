@@ -1,0 +1,33 @@
+{
+  "name": "portfolio-backend",
+  "version": "1.0.0",
+  "description": "Full-stack portfolio REST API with Node.js, Express, MongoDB and JWT authentication",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "server": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": [
+    "portfolio",
+    "express",
+    "mongodb",
+    "mongoose",
+    "jwt",
+    "rest-api"
+  ],
+  "author": "Arun",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
